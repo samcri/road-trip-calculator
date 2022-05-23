@@ -1,0 +1,52 @@
+<title>Road Trip Cost Calculator</title>
+<label>MPG</label><input onchange="calc()" type="number" name="mpg" value="25">
+<label>PPG</label><input onchange="calc()" type="number" name="ppg" value="3.50">
+<label>Distance</label><input onchange="calc()" type="number" name="dis" value="5000">
+<div>total cost: <span id="cost">$0.00</span></div>
+<button onclick="save()">save</button>
+<hr>
+<table>
+	<tbody>
+		<tr>
+			<th>cost</th>
+			<th>mpg</th>
+			<th>ppg</th>
+			<th>distance</th>
+		</tr>
+	</tbody>
+</table>
+<script>
+	function calc() {
+		const nm = document.getElementsByTagName('input');
+		var mpg = parseFloat(nm['mpg'].value);
+		var ppg = parseFloat(nm['ppg'].value);
+		var dis = parseFloat(nm['dis'].value);
+		var new_cost = (dis / mpg) * ppg;
+		cost.innerHTML = '$' + new_cost.toFixed(2);
+	}
+	function save() {
+		const tb = document.getElementsByTagName('tbody')[0];
+		const nm = document.getElementsByTagName('input');
+		var row = document.createElement('tr');
+
+		var cst = document.createElement('td');
+		cst.innerHTML = cost.innerHTML;
+		row.appendChild(cst);
+		var mpg = document.createElement('td');
+		mpg.innerHTML = nm['mpg'].value;
+		row.appendChild(mpg);
+		var ppg = document.createElement('td');
+		ppg.innerHTML = nm['ppg'].value;
+		row.appendChild(ppg);
+		var dis = document.createElement('td');
+		dis.innerHTML = nm['dis'].value;
+		row.appendChild(dis);
+		tb.appendChild(row);
+	}
+	calc();
+</script>
+<style>
+	table { border: solid 1px black; border-collapse: collapse; width: 100%; }
+	td,th { border: solid 1px black; padding: 4px; text-align: right; }
+	input { display: block; }
+</style>
